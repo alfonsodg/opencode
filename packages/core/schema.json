@@ -1,7 +1,7 @@
 {
   "version": "7",
   "dialect": "sqlite",
-  "id": "a1882328-46a8-4ecf-ae06-8cbac747a69a",
+  "id": "f1f14616-b6a1-483d-87b0-d5b7a9132580",
   "prevIds": ["76109fbf-f324-4af0-934c-3ae695275099"],
   "ddl": [
     {
@@ -45,6 +45,14 @@
       "entityType": "tables"
     },
     {
+      "name": "blob_ref",
+      "entityType": "tables"
+    },
+    {
+      "name": "blob",
+      "entityType": "tables"
+    },
+    {
       "name": "instruction_blob",
       "entityType": "tables"
     },
@@ -54,14 +62,6 @@
     },
     {
       "name": "instruction_state",
-      "entityType": "tables"
-    },
-    {
-      "name": "media_blob",
-      "entityType": "tables"
-    },
-    {
-      "name": "media_ref",
       "entityType": "tables"
     },
     {
@@ -750,6 +750,116 @@
     },
     {
       "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "session_id",
+      "entityType": "columns",
+      "table": "blob_ref"
+    },
+    {
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "message_id",
+      "entityType": "columns",
+      "table": "blob_ref"
+    },
+    {
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "hash",
+      "entityType": "columns",
+      "table": "blob_ref"
+    },
+    {
+      "type": "integer",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "seq",
+      "entityType": "columns",
+      "table": "blob_ref"
+    },
+    {
+      "type": "text",
+      "notNull": false,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "hash",
+      "entityType": "columns",
+      "table": "blob"
+    },
+    {
+      "type": "text",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "mime",
+      "entityType": "columns",
+      "table": "blob"
+    },
+    {
+      "type": "integer",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "bytes",
+      "entityType": "columns",
+      "table": "blob"
+    },
+    {
+      "type": "integer",
+      "notNull": false,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "width",
+      "entityType": "columns",
+      "table": "blob"
+    },
+    {
+      "type": "integer",
+      "notNull": false,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "height",
+      "entityType": "columns",
+      "table": "blob"
+    },
+    {
+      "type": "blob",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "data",
+      "entityType": "columns",
+      "table": "blob"
+    },
+    {
+      "type": "integer",
+      "notNull": true,
+      "autoincrement": false,
+      "default": null,
+      "generated": null,
+      "name": "time_created",
+      "entityType": "columns",
+      "table": "blob"
+    },
+    {
+      "type": "text",
       "notNull": false,
       "autoincrement": false,
       "default": null,
@@ -877,116 +987,6 @@
       "name": "current_values",
       "entityType": "columns",
       "table": "instruction_state"
-    },
-    {
-      "type": "text",
-      "notNull": false,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "hash",
-      "entityType": "columns",
-      "table": "media_blob"
-    },
-    {
-      "type": "text",
-      "notNull": true,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "mime",
-      "entityType": "columns",
-      "table": "media_blob"
-    },
-    {
-      "type": "integer",
-      "notNull": true,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "bytes",
-      "entityType": "columns",
-      "table": "media_blob"
-    },
-    {
-      "type": "integer",
-      "notNull": false,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "width",
-      "entityType": "columns",
-      "table": "media_blob"
-    },
-    {
-      "type": "integer",
-      "notNull": false,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "height",
-      "entityType": "columns",
-      "table": "media_blob"
-    },
-    {
-      "type": "blob",
-      "notNull": true,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "data",
-      "entityType": "columns",
-      "table": "media_blob"
-    },
-    {
-      "type": "integer",
-      "notNull": true,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "time_created",
-      "entityType": "columns",
-      "table": "media_blob"
-    },
-    {
-      "type": "text",
-      "notNull": true,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "session_id",
-      "entityType": "columns",
-      "table": "media_ref"
-    },
-    {
-      "type": "text",
-      "notNull": true,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "message_id",
-      "entityType": "columns",
-      "table": "media_ref"
-    },
-    {
-      "type": "text",
-      "notNull": true,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "hash",
-      "entityType": "columns",
-      "table": "media_ref"
-    },
-    {
-      "type": "integer",
-      "notNull": true,
-      "autoincrement": false,
-      "default": null,
-      "generated": null,
-      "name": "seq",
-      "entityType": "columns",
-      "table": "media_ref"
     },
     {
       "type": "text",
@@ -1699,6 +1699,28 @@
       "onUpdate": "NO ACTION",
       "onDelete": "CASCADE",
       "nameExplicit": false,
+      "name": "fk_blob_ref_session_id_session_v2_id_fk",
+      "entityType": "fks",
+      "table": "blob_ref"
+    },
+    {
+      "columns": ["hash"],
+      "tableTo": "blob",
+      "columnsTo": ["hash"],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "nameExplicit": false,
+      "name": "fk_blob_ref_hash_blob_hash_fk",
+      "entityType": "fks",
+      "table": "blob_ref"
+    },
+    {
+      "columns": ["session_id"],
+      "tableTo": "session_v2",
+      "columnsTo": ["id"],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "nameExplicit": false,
       "name": "fk_instruction_entry_session_id_session_v2_id_fk",
       "entityType": "fks",
       "table": "instruction_entry"
@@ -1713,28 +1735,6 @@
       "name": "fk_instruction_state_session_id_session_v2_id_fk",
       "entityType": "fks",
       "table": "instruction_state"
-    },
-    {
-      "columns": ["session_id"],
-      "tableTo": "session_v2",
-      "columnsTo": ["id"],
-      "onUpdate": "NO ACTION",
-      "onDelete": "CASCADE",
-      "nameExplicit": false,
-      "name": "fk_media_ref_session_id_session_v2_id_fk",
-      "entityType": "fks",
-      "table": "media_ref"
-    },
-    {
-      "columns": ["hash"],
-      "tableTo": "media_blob",
-      "columnsTo": ["hash"],
-      "onUpdate": "NO ACTION",
-      "onDelete": "CASCADE",
-      "nameExplicit": false,
-      "name": "fk_media_ref_hash_media_blob_hash_fk",
-      "entityType": "fks",
-      "table": "media_ref"
     },
     {
       "columns": ["session_id"],
@@ -1806,18 +1806,18 @@
       "table": "project_directory"
     },
     {
+      "columns": ["session_id", "message_id", "hash"],
+      "nameExplicit": false,
+      "name": "blob_ref_pk",
+      "entityType": "pks",
+      "table": "blob_ref"
+    },
+    {
       "columns": ["session_id", "key"],
       "nameExplicit": false,
       "name": "instruction_entry_pk",
       "entityType": "pks",
       "table": "instruction_entry"
-    },
-    {
-      "columns": ["session_id", "message_id", "hash"],
-      "nameExplicit": false,
-      "name": "media_ref_pk",
-      "entityType": "pks",
-      "table": "media_ref"
     },
     {
       "columns": ["project_id", "directory"],
@@ -1885,6 +1885,13 @@
     {
       "columns": ["hash"],
       "nameExplicit": false,
+      "name": "blob_pk",
+      "table": "blob",
+      "entityType": "pks"
+    },
+    {
+      "columns": ["hash"],
+      "nameExplicit": false,
       "name": "instruction_blob_pk",
       "table": "instruction_blob",
       "entityType": "pks"
@@ -1894,13 +1901,6 @@
       "nameExplicit": false,
       "name": "instruction_state_pk",
       "table": "instruction_state",
-      "entityType": "pks"
-    },
-    {
-      "columns": ["hash"],
-      "nameExplicit": false,
-      "name": "media_blob_pk",
-      "table": "media_blob",
       "entityType": "pks"
     },
     {
@@ -2010,9 +2010,9 @@
       "isUnique": false,
       "where": null,
       "origin": "manual",
-      "name": "media_ref_hash_idx",
+      "name": "blob_ref_hash_idx",
       "entityType": "indexes",
-      "table": "media_ref"
+      "table": "blob_ref"
     },
     {
       "columns": [
@@ -2028,9 +2028,9 @@
       "isUnique": false,
       "where": null,
       "origin": "manual",
-      "name": "media_ref_session_seq_idx",
+      "name": "blob_ref_session_seq_idx",
       "entityType": "indexes",
-      "table": "media_ref"
+      "table": "blob_ref"
     },
     {
       "columns": [

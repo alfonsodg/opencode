@@ -176,7 +176,7 @@ export const InstructionStateTable = sqliteTable("instruction_state", {
   current_values: text({ mode: "json" }).notNull().$type<Instruction.Values>(),
 })
 
-export const MediaBlobTable = sqliteTable("media_blob", {
+export const BlobTable = sqliteTable("blob", {
   hash: text().primaryKey(),
   mime: text().notNull(),
   bytes: integer().notNull(),
@@ -188,8 +188,8 @@ export const MediaBlobTable = sqliteTable("media_blob", {
     .$default(() => Date.now()),
 })
 
-export const MediaRefTable = sqliteTable(
-  "media_ref",
+export const BlobRefTable = sqliteTable(
+  "blob_ref",
   {
     session_id: text()
       .$type<SessionSchema.ID>()
@@ -198,12 +198,12 @@ export const MediaRefTable = sqliteTable(
     message_id: text().$type<SessionMessage.ID>().notNull(),
     hash: text()
       .notNull()
-      .references(() => MediaBlobTable.hash, { onDelete: "cascade" }),
+      .references(() => BlobTable.hash, { onDelete: "cascade" }),
     seq: integer().notNull(),
   },
   (table) => [
     primaryKey({ columns: [table.session_id, table.message_id, table.hash] }),
-    index("media_ref_hash_idx").on(table.hash),
-    index("media_ref_session_seq_idx").on(table.session_id, table.seq),
+    index("blob_ref_hash_idx").on(table.hash),
+    index("blob_ref_session_seq_idx").on(table.session_id, table.seq),
   ],
 )

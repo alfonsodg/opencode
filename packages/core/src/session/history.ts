@@ -9,7 +9,7 @@ import { SessionMessage } from "./message.js"
 import type { SessionSchema } from "./schema.js"
 import { Instructions } from "../instructions/index.js"
 import { InstructionState } from "./instruction-state.js"
-import { SessionMediaBlob } from "./media-blob.js"
+import { SessionBlob } from "./blob.js"
 import { SessionRecentText } from "./recent-text.js"
 import { SessionMessageTable } from "./sql.js"
 
@@ -101,12 +101,12 @@ export const decodeMessageRow = (row: typeof SessionMessageTable.$inferSelect) =
     ),
   )
 
-/** Decodes rows after restoring media stored in `media_blob`. Reads that return media must use this. */
+/** Decodes rows after restoring media stored in `blob`. Reads that return media must use this. */
 export const decodeMessageRows = Effect.fnUntraced(function* (
   db: DatabaseService,
   rows: ReadonlyArray<typeof SessionMessageTable.$inferSelect>,
 ) {
-  return yield* Effect.forEach(yield* SessionMediaBlob.hydrate(db, rows), decodeMessageRow)
+  return yield* Effect.forEach(yield* SessionBlob.hydrate(db, rows), decodeMessageRow)
 })
 
 const messageEntries = Effect.fnUntraced(function* (
@@ -131,7 +131,7 @@ const messageEntries = Effect.fnUntraced(function* (
     .orderBy(asc(SessionMessageTable.seq))
     .all()
     .pipe(Effect.orDie)
-  const decoded = yield* Effect.forEach(yield* SessionMediaBlob.hydrate(db, rows), (row) =>
+  const decoded = yield* Effect.forEach(yield* SessionBlob.hydrate(db, rows), (row) =>
     decodeMessageRow(row).pipe(Effect.map((message) => ({ seq: row.seq, message }))),
   )
   // A window that cannot replay leaves nothing to start from, so read from the compaction before it.

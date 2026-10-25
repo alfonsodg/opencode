@@ -26,7 +26,7 @@ import { SessionStore } from "@opencode/core/session/store"
 import { Shell } from "@opencode/schema/shell"
 import {
   InstructionStateTable,
-  MediaBlobTable,
+  BlobTable,
   SessionInboxTable,
   SessionMessageTable,
   SessionTable,
@@ -1015,7 +1015,7 @@ describe("SessionProjector", () => {
       const legacyUri = `/api/media/${hash}`
 
       yield* db
-        .insert(MediaBlobTable)
+        .insert(BlobTable)
         .values({
           hash,
           mime: "application/pdf",

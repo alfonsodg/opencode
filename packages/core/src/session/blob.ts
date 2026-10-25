@@ -1,10 +1,10 @@
-export * as SessionMediaBlob from "./media-blob.js"
+export * as SessionBlob from "./blob.js"
 
 import { createHash } from "node:crypto"
 import { inArray } from "drizzle-orm"
 import { Effect } from "effect"
 import type { Database } from "../database/database.js"
-import { MediaBlobTable, SessionInboxTable, SessionMessageTable } from "./sql.js"
+import { BlobTable, SessionInboxTable, SessionMessageTable } from "./sql.js"
 
 type DatabaseService = Database.Interface["db"]
 type MessageRow = typeof SessionMessageTable.$inferSelect
@@ -135,9 +135,9 @@ const loadBlobs = Effect.fnUntraced(function* (db: DatabaseService, hashes: Read
   const blobs = new Map<string, { readonly mime: string; readonly base64: string }>()
   for (let offset = 0; offset < all.length; offset += 500) {
     const found = yield* db
-      .select({ hash: MediaBlobTable.hash, mime: MediaBlobTable.mime, data: MediaBlobTable.data })
-      .from(MediaBlobTable)
-      .where(inArray(MediaBlobTable.hash, all.slice(offset, offset + 500)))
+      .select({ hash: BlobTable.hash, mime: BlobTable.mime, data: BlobTable.data })
+      .from(BlobTable)
+      .where(inArray(BlobTable.hash, all.slice(offset, offset + 500)))
       .all()
       .pipe(Effect.orDie)
     for (const blob of found)
